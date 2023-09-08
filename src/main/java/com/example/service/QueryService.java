@@ -1,7 +1,6 @@
-package com.example.TestNav2.service;
+package com.example.service;
 
-import com.example.TestNav2.config.DbConfig;
-import lombok.extern.log4j.Log4j;
+import com.example.config.DbConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +24,7 @@ public class QueryService {
     public void performQueries(String threadName) {
         Random random = new Random();
         int count = 0;
-        while (count < 100) {
+        while (count < 10) {
             String dbName = "db_" + (random.nextInt(3) + 1);
             int value = random.nextInt(100) + 1;
             queryRandomValue(dbName, value, threadName);
@@ -40,9 +39,9 @@ public class QueryService {
         String querySQL = "SELECT column_name FROM table_name WHERE column_name = ?";
         boolean found = jdbcTemplate.query(querySQL, new Object[]{value}, (ResultSetExtractor<Boolean>) rs -> rs.next());
         if (found) {
-            System.out.println("Значение " + value + " найдено в базе данных " + dbName + " выполнил поток № " + threadName);
+            log.info("Значение " + value + " найдено в базе данных " + dbName + " выполнил поток № " + threadName);
         } else {
-            System.out.println("Значение " + value + " не найдено в базе данных " + dbName + " поток № " + threadName);
+            log.info("Значение " + value + " не найдено в базе данных " + dbName + " поток № " + threadName);
         }
     }
 }
