@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Slf4j
-public class DatabaseRepository {
+public class DatabaseRepository implements DatabaseJDBCPostgreSQL{
     private final JdbcTemplate jdbcTemplate;
     private final DbConfig config;
 
