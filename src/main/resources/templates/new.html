@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>New Database</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/index}" th:object="${database}">
+    <label for="databaseName">Введите имя БД: </label>
+    <input type="text" th:field="*{databaseName}" id="databaseName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('databaseName')}" th:errors="*{databaseName}">DatabaseName Error</div>
+    <br/>
+
+    <input type="submit" value="Создать"/>
+</form>
+
+</body>
+</html>
